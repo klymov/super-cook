@@ -1,5 +1,5 @@
 <h1><%= @item.name %></h1>
-<span>Develop version</span>
+<!--<span>Develop version</span>-->
 <% if @item.images? %>
   <% @item.images.each do |i| %>
     <%= link_to(image_tag(i.detail_promo_img.url, alt: 'Image', class: 'detail_promo_img'), i.responsive_img.url, target: '_blank') %>
