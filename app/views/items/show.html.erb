@@ -1,0 +1,18 @@
+<h1><%= @item.name %></h1>
+
+<% if @item.images? %>
+  <% @item.images.each do |i| %>
+    <%= link_to(image_tag(i.detail_promo_img.url, alt: 'Image', class: 'detail_promo_img'), i.responsive_img.url, target: '_blank') %>
+  <% end %>
+<% end %>
+
+<ul>
+  <li> В наличии:  <%= @item.available %>   </li>
+  <li> <%= "#{@item.price} грн." %>         </li>
+  <li> Вес: <%= @item.weight %> кг          </li>
+  <li> Количество: <%= @item.quantity %>    </li>
+  <li> <%= @item.description %>             </li>
+</ul>
+<%= link_to I18n.t('labels.edit'), edit_item_path(@item)%>
+<br>
+<%= link_to I18n.t('labels.home'), items_path %>

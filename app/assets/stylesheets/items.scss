@@ -1,0 +1,13 @@
+// Place all the styles related to the items controller here.
+// They will automatically be included in application.scss.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.alert {
+  font-weight: bold;
+  &.alert-notice {
+    //font-weight: normal;
+    background: green;
+  }
+  &.alert-alert {
+    background: red;
+  }
+}

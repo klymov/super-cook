@@ -1,0 +1,42 @@
+<H1>Редактирование товара</H1>
+
+<%= nested_form_for @item, html: { multipart: true } do |f| %>
+
+  <div class="field">Изображения: <br/>
+
+    <%= f.file_field :images, multiple: true %> <br/>
+
+    <% if f.images? %>
+      <%= f.fields_for :images do |i|  %>
+        <p>
+          <%= image_tag(i.detail_promo_img.url, alt: 'Image', class: 'detail_promo_img') %>
+          <%= i.link_to_remove "Remove this image" %>
+        </p>
+      <% end %>
+    <% end %>
+
+  </div>
+
+
+  <div class="field">Название:  <br/><%= f.text_field :name, class: 'field' %></div>
+  <div class="field">Категория: <br/>
+    <%= f.collection_select(:category_id, Category.all, :id, :name_category) %>
+  </div>
+  <div class="field">Цена:      <br/><%= f.number_field(:price, in: 0.00..2000.00, step: 0.01) %></div>
+  <div class="field">Вес одной единицы (кг):  <br/><%= f.number_field( :weight, in: 1..5, step: 1) %></div>
+  <div class="field">Количество:<br/><%= f.number_field( :quantity, in: 1..30, step: 1) %></div>
+  <div class="field">Доступность:<br/>
+    <%= f.radio_button( :available, 'false' ) %>
+    <%= label_tag( :available_false, 'нет' ) %>
+    <%= f.radio_button( :available, 'true' ) %>
+    <%= label_tag( :available_true, 'есть' ) %>
+  </div>
+
+  <div class="field">Описание:  <br/>
+    <%= f.text_area :description, class: 'form-control', rows:'1', placeholder: 'Особенности товара'  %>
+  </div>
+
+  <div class="actions"><%= f.submit 'Сохранить товар' %></div>
+
+
+<% end %>

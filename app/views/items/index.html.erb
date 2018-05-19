@@ -1,0 +1,49 @@
+<div class="container">
+  <h1 class="navbar-header">Магазинчик</h1>
+
+  <% if @items.empty? %>
+      <b>Товар отсутствует</b>
+  <% else %>
+      <table class="table-bordered table">
+        <thead>
+
+        <tr>
+          <th><%= I18n.t('labels.id')    %></th>
+          <th></th>
+          <th><%= I18n.t('labels.name')  %></th>
+          <th><%= I18n.t('labels.price') %></th>
+          <th><%= I18n.t('labels.category')     %></th>
+          <th><%= I18n.t('labels.weight')       %></th>
+          <th><%= I18n.t('labels.quantity')     %></th>
+          <th><%= I18n.t('labels.available')    %></th>
+          <th><%= I18n.t('labels.description')  %></th>
+          <th></th>
+          <th><%= I18n.t('labels.upvote')       %></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @items.each do |i| %>
+            <tr>
+              <td><%= i.id %></td>
+              <td><%= image_tag i.images[0].url(:detail_img_thumbs_l_i), class: 'thumb' if i.images? %></td>
+              <td>
+                <%= link_to i.name, item_path(i) %>
+                <% link_to i.name, "/items/#{i.id}" %>
+              </td>
+              <td><%= i.price %> грн.</td>
+              <td><%= i.category.name_category %></td>
+
+              <td><%= i.weight %> кг</td>
+              <td><%= i.quantity %></td>
+
+              <td><%= i.available %></td>
+              <td><%= "#{i.description} " %></td>
+
+              <td><%= link_to 'Удалить', i, method: :delete, data: { confirm: 'Точно удалить?' } %></td>
+              <td>Рейтинг: <%= i.votes_count %>, <%= link_to '+', upvote_item_path(i) %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+  <% end %>
+</div>
